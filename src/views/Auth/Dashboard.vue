@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { jsPDF } from 'jspdf'
 import * as XLSX from 'xlsx'
 import SummaryCard from '@/components/Auth/SummaryCard.vue'
 import MainTable from '@/components/Auth/Table.vue'
@@ -219,22 +218,6 @@ const changePage = (page) => {
   }
 }
 
-const exportToPDF = () => {
-  const doc = new jsPDF()
-  let y = 10
-  doc.text('Data Mahasiswa', 10, y)
-  y += 10
-  paginatedMahasiswa.value.forEach((mahasiswa, index) => {
-    doc.text(
-      `${index + 1}. ${mahasiswa.name} - ${mahasiswa.nim} - ${mahasiswa.prodi} - ${mahasiswa.Judul} - ${mahasiswa.pbb1} - ${mahasiswa.pbb2} - ${mahasiswa.status}`,
-      10,
-      y,
-    )
-    y += 10
-  })
-  doc.save('data_mahasiswa.pdf')
-}
-
 const exportToExcel = () => {
   const worksheet = XLSX.utils.json_to_sheet(filteredMahasiswa.value)
   const workbook = XLSX.utils.book_new()
@@ -301,7 +284,6 @@ const handleSearchTerm = (term) => {
         :total-pages="totalPages"
         @selectedProdi="handleSelectedProdi"
         @exportToExcel="exportToExcel"
-        @exportToPDF="exportToPDF"
         @searchTerm="handleSearchTerm"
         @changePage="changePage"
       />

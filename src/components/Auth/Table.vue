@@ -31,7 +31,7 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['selectedProdi', 'exportToPDF', 'exportToExcel', 'searchTerm'])
+const emit = defineEmits(['selectedProdi', 'exportToExcel', 'searchTerm'])
 
 const selectedProdi = ref('')
 const searchTerm = ref('')
@@ -42,10 +42,6 @@ const handleSelectedProdiChange = () => {
 
 const handleSearchTermChange = () => {
   emit('searchTerm', searchTerm.value)
-}
-
-const exportToPDF = () => {
-  emit('exportToPDF')
 }
 
 const exportToExcel = () => {
@@ -77,12 +73,6 @@ const exportToExcel = () => {
         />
       </div>
       <div class="flex gap-2">
-        <button
-          @click="exportToPDF"
-          class="flex items-center gap-2 py-2 px-4 rounded-lg bg-[#397A3F] text-white"
-        >
-          <i class="pi pi-file-pdf"></i> Export PDF
-        </button>
         <button
           @click="exportToExcel"
           class="flex items-center gap-2 py-2 px-4 rounded-lg bg-[#397A3F] text-white"
